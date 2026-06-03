@@ -123,6 +123,56 @@ Creates a new user account.
 }
 ```
 
+### Login a user
+
+Authenticates an existing user and returns a JWT token.
+
+**Endpoint:**
+`POST /api/users/login`
+
+**Request Body:**
+
+| Field      | Type   | Required | Description                   |
+| ---------- | ------ | -------- | ----------------------------- |
+| `email`    | string | Yes      | Registered user email address |
+| `password` | string | Yes      | User password                 |
+
+**Example Request:**
+
+```json
+{
+  "email": "john.doe@example.com",
+  "password": "securepassword123"
+}
+```
+
+**Success Response (200 OK):**
+
+```json
+{
+  "msg": "Login successful",
+  "user": {
+    "_id": "60d0fe4f5311236168a109ca",
+    "fullName": {
+      "firstName": "John",
+      "lastName": "Doe"
+    },
+    "email": "john.doe@example.com",
+    "socketId": null,
+    "__v": 0
+  },
+  "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9..."
+}
+```
+
+**Failure Response (400 Bad Request):**
+
+```json
+{
+  "error": "Invalid credentials"
+}
+```
+
 ## Notes
 
 - Passwords are hashed using `bcrypt` before saving.

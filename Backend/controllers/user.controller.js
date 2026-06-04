@@ -58,8 +58,14 @@ async function loginUser(req, res, next) {
   });
 }
 
+async function getUserProfile(req, res, next) {
+  return res.status(200).json({
+    user: req.user,
+  });
+}
+
 module.exports = {
   registerUser,
   loginUser,
-  // getUserProfile,
+  getUserProfile,
 };

@@ -49,6 +49,8 @@ async function loginUser(req, res, next) {
 
   const token = user.generateAuthToken();
 
+  res.cookie("token", token);
+
   res.json({
     msg: "Login Successful!",
     user,
@@ -59,4 +61,5 @@ async function loginUser(req, res, next) {
 module.exports = {
   registerUser,
   loginUser,
+  // getUserProfile,
 };

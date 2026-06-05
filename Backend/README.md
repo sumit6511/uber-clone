@@ -173,6 +173,85 @@ Authenticates an existing user and returns a JWT token.
 }
 ```
 
+### Get user profile
+
+Returns the currently authenticated user profile.
+
+**Endpoint:**
+`GET /api/users/profile`
+
+**Headers:**
+
+| Header          | Value            | Required | Description                   |
+| --------------- | ---------------- | -------- | ----------------------------- |
+| `Authorization` | `Bearer <token>` | Yes      | JWT token returned from login |
+
+**Success Response (200 OK):**
+
+```json
+{
+  "user": {
+    "_id": "60d0fe4f5311236168a109ca",
+    "fullName": {
+      "firstName": "John",
+      "lastName": "Doe"
+    },
+    "email": "john.doe@example.com",
+    "socketId": null,
+    "__v": 0
+  }
+}
+```
+
+**Failure Response (401 Unauthorized):**
+
+```json
+{
+  "error": "Access denied! No token provided."
+}
+```
+
+```json
+{
+  "error": "Unauthorized! Invalid token."
+}
+```
+
+### Logout a user
+
+Clears the auth token cookie and logs out the current user.
+
+**Endpoint:**
+`POST /api/users/logout`
+
+**Headers:**
+
+| Header          | Value            | Required | Description                   |
+| --------------- | ---------------- | -------- | ----------------------------- |
+| `Authorization` | `Bearer <token>` | Yes      | JWT token returned from login |
+
+**Success Response (200 OK):**
+
+```json
+{
+  "msg": "Logout successful"
+}
+```
+
+**Failure Response (401 Unauthorized):**
+
+```json
+{
+  "error": "Access denied! No token provided."
+}
+```
+
+```json
+{
+  "error": "Unauthorized! Invalid token."
+}
+```
+
 ## Notes
 
 - Passwords are hashed using `bcrypt` before saving.
